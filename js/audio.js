@@ -35,6 +35,33 @@ export class AudioManager {
     this.playTone(520, 0.1, "square", 0.25);
   }
 
+  playExplosionShot() {
+    if (!this.ctx) return;
+    const now = this.ctx.currentTime;
+    const osc1 = this.ctx.createOscillator();
+    const osc2 = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc1.type = "sawtooth";
+    osc2.type = "triangle";
+    osc1.frequency.setValueAtTime(320, now);
+    osc2.frequency.setValueAtTime(210, now);
+    osc1.frequency.exponentialRampToValueAtTime(90, now + 0.12);
+    osc2.frequency.exponentialRampToValueAtTime(70, now + 0.12);
+
+    gain.gain.setValueAtTime(0.22, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc1.start(now);
+    osc2.start(now);
+    osc1.stop(now + 0.15);
+    osc2.stop(now + 0.15);
+  }
+
   playHit() {
     this.playTone(240, 0.12, "triangle", 0.2);
     setTimeout(() => this.playTone(160, 0.08, "triangle", 0.15), 60);

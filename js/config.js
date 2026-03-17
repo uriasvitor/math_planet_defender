@@ -30,7 +30,7 @@ export const scenarios = {
   sandbox: { name: "Sandbox", spawn: 1.8, speed: 45 },
   recuperacao: { name: "Recuperação", spawn: 1.6, speed: 45 },
   sub: { name: "Subtracao", spawn: 2.0, speed: 50 },
-  mul: { name: "Multiplicacao", spawn: 2.0, speed: 55 },
+  mul: { name: "Multiplicacao", spawn: 2.0, speed: 49 },
   div: { name: "Divisao", spawn: 2.1, speed: 48 },
   sqrt: { name: "Raiz", spawn: 2.2, speed: 45 },
   pow: { name: "Potenciação", spawn: 2.0, speed: 50 },

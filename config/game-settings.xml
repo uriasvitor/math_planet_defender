@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameSettings>
+  <!-- Seletor da dificuldade ativa + multiplicador geral -->
+  <difficulty>
+    <level>normal</level>
+    <multiplier>1</multiplier>
+    <!-- Perfis base usados por cada nivel -->
+    <profiles>
+      <easy>0.85</easy>
+      <normal>1</normal>
+      <hard>1.2</hard>
+      <insane>1.4</insane>
+    </profiles>
+  </difficulty>
+
+  <!-- Liga/desliga recursos individualmente -->
+  <features>
+    <heartsEnabled>true</heartsEnabled>
+    <powerUpsEnabled>true</powerUpsEnabled>
+    <powerMatchEnabled>true</powerMatchEnabled>
+    <powerClearEnabled>true</powerClearEnabled>
+  </features>
+
+  <!-- Configuracoes do jogador -->
+  <player>
+    <baseLife>3</baseLife>
+    <maxLife>0</maxLife>
+    <!-- Quantas vidas ganha ao pegar um coracao -->
+    <lifePerHeart>1</lifePerHeart>
+  </player>
+
+  <!-- Configuracoes do boss -->
+  <boss>
+    <enabled>true</enabled>
+    <hp>300</hp>
+    <damagePerHit>30</damagePerHit>
+    <showBar>true</showBar>
+  </boss>
+
+  <!-- Chances e multiplicadores de spawn -->
+  <spawn>
+    <heartChance>0.06</heartChance>
+    <powerUpChance>0.018</powerUpChance>
+    <!-- Pesos relativos de escolha entre power-ups -->
+    <powerMatchChance>0.5</powerMatchChance>
+    <powerClearChance>0.5</powerClearChance>
+    <paceMultiplier>1</paceMultiplier>
+    <enemySpeedMultiplier>1</enemySpeedMultiplier>
+  </spawn>
+
+  <!-- Duracao dos power-ups -->
+  <powerUps>
+    <matchDuration>5</matchDuration>
+  </powerUps>
+
+  <!-- Multiplicador geral de pontuacao -->
+  <score>
+    <multiplier>1</multiplier>
+  </score>
+</gameSettings>

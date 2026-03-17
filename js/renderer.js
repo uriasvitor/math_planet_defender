@@ -49,11 +49,15 @@ export class Renderer {
     this.enemyTexture = this.createFallbackEnemyTexture();
     this.minionTexture = this.createFallbackMinionTexture();
     this.heartTexture = this.createFallbackHeartTexture();
+    this.powerMatchTexture = this.createFallbackPowerMatchTexture();
+    this.powerClearTexture = this.createFallbackPowerClearTexture();
     this.bossTexture = this.createFallbackBossTexture();
     this.loadPlayerTexture();
     this.loadEnemyTexture();
     this.loadMinionTexture();
     this.loadHeartTexture();
+    this.loadPowerMatchTexture();
+    this.loadPowerClearTexture();
     this.loadBossTexture();
     this.playerMesh = this.createPlayerSprite();
     this.scene.add(this.playerMesh);
@@ -235,6 +239,40 @@ export class Renderer {
     );
   }
 
+  loadPowerMatchTexture() {
+    const loader = new THREE.TextureLoader();
+    loader.load(
+      "images/powerups/explosion_powerup.png",
+      (tex) => {
+        tex.magFilter = THREE.LinearFilter;
+        tex.minFilter = THREE.LinearMipmapLinearFilter;
+        this.powerMatchTexture = tex;
+        this.applyTextureToEnemies("power_match", tex);
+      },
+      undefined,
+      () => {
+        this.powerMatchTexture = this.createFallbackPowerMatchTexture();
+      },
+    );
+  }
+
+  loadPowerClearTexture() {
+    const loader = new THREE.TextureLoader();
+    loader.load(
+      "images/powerups/limpa_tudo.png",
+      (tex) => {
+        tex.magFilter = THREE.LinearFilter;
+        tex.minFilter = THREE.LinearMipmapLinearFilter;
+        this.powerClearTexture = tex;
+        this.applyTextureToEnemies("power_clear", tex);
+      },
+      undefined,
+      () => {
+        this.powerClearTexture = this.createFallbackPowerClearTexture();
+      },
+    );
+  }
+
   createFallbackPlayerTexture() {
     const size = 96;
     const cnv = document.createElement("canvas");
@@ -326,6 +364,47 @@ export class Renderer {
     return tex;
   }
 
+  createFallbackPowerMatchTexture() {
+    const size = 64;
+    const cnv = document.createElement("canvas");
+    cnv.width = cnv.height = size;
+    const c = cnv.getContext("2d");
+    c.imageSmoothingEnabled = false;
+
+    c.fillStyle = "#f6dc76";
+    c.fillRect(24, 8, 16, 48);
+    c.fillRect(8, 24, 48, 16);
+    c.fillStyle = "#ffeeb0";
+    c.fillRect(28, 12, 8, 40);
+    c.fillRect(12, 28, 40, 8);
+
+    const tex = new THREE.CanvasTexture(cnv);
+    tex.magFilter = THREE.NearestFilter;
+    tex.minFilter = THREE.NearestFilter;
+    return tex;
+  }
+
+  createFallbackPowerClearTexture() {
+    const size = 64;
+    const cnv = document.createElement("canvas");
+    cnv.width = cnv.height = size;
+    const c = cnv.getContext("2d");
+    c.imageSmoothingEnabled = false;
+
+    c.fillStyle = "#9af5c8";
+    c.fillRect(12, 12, 40, 40);
+    c.fillStyle = "#5de29f";
+    c.fillRect(16, 16, 32, 32);
+    c.fillStyle = "#d8ffe9";
+    c.fillRect(28, 8, 8, 48);
+    c.fillRect(8, 28, 48, 8);
+
+    const tex = new THREE.CanvasTexture(cnv);
+    tex.magFilter = THREE.NearestFilter;
+    tex.minFilter = THREE.NearestFilter;
+    return tex;
+  }
+
   createFallbackBossTexture() {
     const size = 128;
     const cnv = document.createElement("canvas");
@@ -389,6 +468,38 @@ export class Renderer {
 
   createEnemySprite(kind) {
     // create sprite using texture aspect to avoid distortion when available
+    if (kind === "power_match") {
+      const tex = this.powerMatchTexture || this.enemyTexture;
+      const base = 36;
+      const aspect =
+        tex?.image && tex.image.width && tex.image.height
+          ? tex.image.width / tex.image.height
+          : 1;
+      const sprite = this.createSpriteFromTexture(tex, {
+        x: Math.round(base * aspect),
+        y: base,
+      });
+      sprite.material.depthTest = false;
+      sprite.renderOrder = 13;
+      sprite.material.color = new THREE.Color(0xffffff);
+      return sprite;
+    }
+    if (kind === "power_clear") {
+      const tex = this.powerClearTexture || this.enemyTexture;
+      const base = 40;
+      const aspect =
+        tex?.image && tex.image.width && tex.image.height
+          ? tex.image.width / tex.image.height
+          : 1;
+      const sprite = this.createSpriteFromTexture(tex, {
+        x: Math.round(base * aspect),
+        y: base,
+      });
+      sprite.material.depthTest = false;
+      sprite.renderOrder = 13;
+      sprite.material.color = new THREE.Color(0xffffff);
+      return sprite;
+    }
     if (kind === "minion") {
       const tex = this.minionTexture;
       // scaled ~2x smaller
@@ -618,6 +729,8 @@ export class Renderer {
     if (kind === "asteroid") return -50;
     if (kind === "minion") return -42;
     if (kind === "heart") return -38;
+    if (kind === "power_match") return -40;
+    if (kind === "power_clear") return -44;
     return -32;
   }
 

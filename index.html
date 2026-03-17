@@ -122,6 +122,220 @@
         <div style="margin-top: 8px; display: flex; gap: 8px">
           <button id="modsCloseBtn" class="ghost-btn">Fechar</button>
         </div>
+        <h4 style="width: 100%; margin-top: 10px">Configuracoes do Jogo</h4>
+        <div class="game-settings-grid">
+          <label for="cfgDifficulty">Dificuldade</label>
+          <select id="cfgDifficulty">
+            <option value="easy">Facil</option>
+            <option value="normal">Normal</option>
+            <option value="hard">Dificil</option>
+            <option value="insane">Insano</option>
+          </select>
+
+          <label for="cfgDifficultyMultiplier">Multiplicador dificuldade</label>
+          <input
+            id="cfgDifficultyMultiplier"
+            type="number"
+            min="0.5"
+            max="3"
+            step="0.05"
+            value="1"
+          />
+
+          <label for="cfgBaseLife">Vida inicial</label>
+          <input
+            id="cfgBaseLife"
+            type="number"
+            min="1"
+            max="99"
+            step="1"
+            value="3"
+          />
+
+          <label for="cfgMaxLife">Vida maxima (0 sem limite)</label>
+          <input
+            id="cfgMaxLife"
+            type="number"
+            min="0"
+            max="999"
+            step="1"
+            value="0"
+          />
+
+          <label for="cfgBossHp">HP do boss</label>
+          <input
+            id="cfgBossHp"
+            type="number"
+            min="20"
+            max="9999"
+            step="10"
+            value="300"
+          />
+
+          <label for="cfgBossDamage">Dano no boss por tiro</label>
+          <input
+            id="cfgBossDamage"
+            type="number"
+            min="1"
+            max="999"
+            step="1"
+            value="30"
+          />
+
+          <label for="cfgHeartSpawnChance">Chance de coracao (0-0.4)</label>
+          <input
+            id="cfgHeartSpawnChance"
+            type="number"
+            min="0"
+            max="0.4"
+            step="0.001"
+            value="0.06"
+          />
+
+          <label for="cfgPowerUpSpawnChance">Chance de power-up (0-0.2)</label>
+          <input
+            id="cfgPowerUpSpawnChance"
+            type="number"
+            min="0"
+            max="0.2"
+            step="0.001"
+            value="0.018"
+          />
+
+          <label for="cfgMatchPowerDuration">Duracao contas iguais (s)</label>
+          <input
+            id="cfgMatchPowerDuration"
+            type="number"
+            min="1"
+            max="20"
+            step="0.1"
+            value="5"
+          />
+
+          <label for="cfgPaceMultiplier">Multiplicador de ritmo</label>
+          <input
+            id="cfgPaceMultiplier"
+            type="number"
+            min="0.4"
+            max="3"
+            step="0.05"
+            value="1"
+          />
+
+          <label for="cfgEnemySpeedMultiplier"
+            >Multiplicador velocidade inimigo</label
+          >
+          <input
+            id="cfgEnemySpeedMultiplier"
+            type="number"
+            min="0.4"
+            max="3"
+            step="0.05"
+            value="1"
+          />
+
+          <label for="cfgScoreMultiplier">Multiplicador de pontos</label>
+          <input
+            id="cfgScoreMultiplier"
+            type="number"
+            min="0.2"
+            max="5"
+            step="0.1"
+            value="1"
+          />
+
+          <label for="cfgBossBarEnabled">Mostrar barra de boss</label>
+          <input id="cfgBossBarEnabled" type="checkbox" checked />
+
+          <label for="cfgBossEnabled">Boss ativo</label>
+          <input id="cfgBossEnabled" type="checkbox" checked />
+
+          <label for="cfgHeartsEnabled">Coracoes ativos</label>
+          <input id="cfgHeartsEnabled" type="checkbox" checked />
+
+          <label for="cfgLifePerHeart">Vida por coracao</label>
+          <input
+            id="cfgLifePerHeart"
+            type="number"
+            min="1"
+            max="10"
+            step="1"
+            value="1"
+          />
+
+          <label for="cfgPowerUpsEnabled">Power-ups ativos</label>
+          <input id="cfgPowerUpsEnabled" type="checkbox" checked />
+
+          <label for="cfgPowerMatchEnabled">Power-up contas iguais</label>
+          <input id="cfgPowerMatchEnabled" type="checkbox" checked />
+
+          <label for="cfgPowerClearEnabled">Power-up limpar tudo</label>
+          <input id="cfgPowerClearEnabled" type="checkbox" checked />
+
+          <label for="cfgPowerMatchChance">Peso contas iguais</label>
+          <input
+            id="cfgPowerMatchChance"
+            type="number"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.5"
+          />
+
+          <label for="cfgPowerClearChance">Peso limpar tudo</label>
+          <input
+            id="cfgPowerClearChance"
+            type="number"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.5"
+          />
+
+          <label for="cfgDifficultyEasy">Perfil Facil</label>
+          <input
+            id="cfgDifficultyEasy"
+            type="number"
+            min="0.4"
+            max="3"
+            step="0.05"
+            value="0.85"
+          />
+
+          <label for="cfgDifficultyNormal">Perfil Normal</label>
+          <input
+            id="cfgDifficultyNormal"
+            type="number"
+            min="0.4"
+            max="3"
+            step="0.05"
+            value="1"
+          />
+
+          <label for="cfgDifficultyHard">Perfil Dificil</label>
+          <input
+            id="cfgDifficultyHard"
+            type="number"
+            min="0.4"
+            max="3"
+            step="0.05"
+            value="1.2"
+          />
+
+          <label for="cfgDifficultyInsane">Perfil Insano</label>
+          <input
+            id="cfgDifficultyInsane"
+            type="number"
+            min="0.4"
+            max="3"
+            step="0.05"
+            value="1.4"
+          />
+        </div>
+        <div style="margin-top: 8px; display: flex; gap: 8px; width: 100%">
+          <button id="cfgSaveBtn" class="cta">Salvar Config</button>
+          <button id="cfgResetBtn" class="ghost-btn">Restaurar XML</button>
+        </div>
       </div>
 
       <div id="trainConfigPanel" class="train-config hidden">
@@ -163,6 +377,9 @@
           <option value="boss">Boss</option>
           <option value="heart">Vida</option>
           <option value="minion">Minion</option>
+          <option value="power_match">Power: Contas Iguais</option>
+          <option value="power_clear">Power: Limpar Tudo</option>
+          <option value="power_random">Power: Aleatorio</option>
         </select>
         <label for="sbCount" style="margin-left: 8px">Quantidade:</label>
         <input
@@ -245,44 +462,62 @@
           <span id="pace" class="value">0</span>
         </div>
       </section>
-      <section class="arena-wrapper">
-        <div id="attemptsCounter" class="attempts-counter">Tentativas: 0</div>
+      <section class="arena-layout">
+        <section class="arena-wrapper">
+          <div id="attemptsCounter" class="attempts-counter">Tentativas: 0</div>
 
-        <canvas id="arena" width="960" height="560"></canvas>
+          <canvas id="arena" width="960" height="560"></canvas>
 
-        <div class="overlay hidden" id="overlay">
-          <p class="title" id="overlayTitle">Base invadida</p>
-          <p class="subtitle" id="overlaySubtitle">
-            Use Reiniciar para tentar novamente.
-          </p>
-          <button id="playAgain">Jogar de novo</button>
-        </div>
-        <div class="boss-bar hidden" id="bossBar">
-          <div class="boss-bar-label">Chefao</div>
-          <div class="boss-bar-track">
-            <div class="boss-bar-fill" id="bossBarFill"></div>
+          <div class="overlay hidden" id="overlay">
+            <p class="title" id="overlayTitle">Base invadida</p>
+            <p class="subtitle" id="overlaySubtitle">
+              Use Reiniciar para tentar novamente.
+            </p>
+            <button id="playAgain">Jogar de novo</button>
           </div>
-        </div>
-        <section class="terminal-panel">
-          <div class="terminal-inner">
-            <div class="terminal-line">
-              ONDA: <span id="wave">1</span> | VIDA:
-              <span id="healthStatus" class="ok">OK</span>
-            </div>
-            <div class="terminal-line">
-              ESCREVA: [
-              <input
-                id="answer"
-                type="text"
-                inputmode="numeric"
-                autocomplete="off"
-                placeholder="59"
-              />
-              ]
+          <div class="boss-bar hidden" id="bossBar">
+            <div class="boss-bar-label">Chefao</div>
+            <div class="boss-bar-track">
+              <div class="boss-bar-fill" id="bossBarFill"></div>
             </div>
           </div>
-          <button id="shootBtn" class="shoot-btn">Atirar</button>
+          <div class="match-power-timer hidden" id="matchPowerTimer">
+            <div class="match-power-header">
+              <span>Iguais</span>
+              <span id="matchPowerTimeText">0.0s</span>
+            </div>
+            <div class="match-power-track">
+              <div class="match-power-fill" id="matchPowerFill"></div>
+            </div>
+          </div>
+          <section class="terminal-panel">
+            <div class="terminal-inner">
+              <div class="terminal-line">
+                ONDA: <span id="wave">1</span> | VIDA:
+                <span id="healthStatus" class="ok">OK</span>
+              </div>
+              <div class="terminal-line">
+                ESCREVA: [
+                <input
+                  id="answer"
+                  type="text"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  placeholder="59"
+                />
+                ]
+              </div>
+            </div>
+            <button id="shootBtn" class="shoot-btn">Atirar</button>
+          </section>
         </section>
+
+        <aside id="attemptHistoryPanel" class="attempt-history-dock">
+          <p class="attempt-history-title">Ultimas tentativas</p>
+          <ul id="attemptHistoryList" class="attempt-history-list">
+            <li class="empty">Sem tentativas ainda.</li>
+          </ul>
+        </aside>
       </section>
     </main>
 

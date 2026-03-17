@@ -48,6 +48,7 @@ export class StorageManager {
 
   clearAll() {
     this.best = { ...DEFAULT_BEST };
+    this.failures = { ...DEFAULT_FAILURES };
     this.save();
   }
 

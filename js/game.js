@@ -126,7 +126,7 @@ export class Game {
       ),
       difficultyProfiles,
       heartsEnabled: Boolean(merged.heartsEnabled),
-      lifePerHeart: Math.max(1, Math.min(10, Math.floor(toNumber(merged.lifePerHeart, 1)))),
+      lifePerHeart: Math.max(1, Math.min(99, Math.floor(toNumber(merged.lifePerHeart, 1)))),
       bossEnabled: Boolean(merged.bossEnabled),
       baseLife: Math.max(1, Math.floor(toNumber(merged.baseLife, 3))),
       maxLife: Math.max(0, Math.floor(toNumber(merged.maxLife, 0))),
@@ -176,11 +176,12 @@ export class Game {
 
   setGameConfig(config = {}) {
     this.settings = this.normalizeGameConfig({ ...this.settings, ...config });
+    const lifeCap = this.getLifeCap();
     if (this.state && (!this.state.running || this.state.gameOver)) {
       this.state.baseLife = this.settings.baseLife;
     }
-    if (this.state && this.settings.maxLife > 0) {
-      this.state.baseLife = Math.min(this.state.baseLife, this.settings.maxLife);
+    if (this.state && lifeCap > 0) {
+      this.state.baseLife = Math.min(this.state.baseLife, lifeCap);
     }
     if (this.state && Array.isArray(this.state.enemies)) {
       this.state.enemies = this.state.enemies.filter((enemy) => {
@@ -264,6 +265,14 @@ export class Game {
     if (this.state.baseLife >= 3) return { label: "OK", cls: "ok" };
     if (this.state.baseLife === 2) return { label: "WARN", cls: "warn" };
     return { label: "CRIT", cls: "crit" };
+  }
+
+  getLifeCap() {
+    const cap = Math.max(0, Math.floor(toNumber(this.settings.maxLife, 0)));
+    // A cap at or below the starting life makes heart pickups look broken,
+    // so only enforce it when it is above the initial amount.
+    if (cap <= this.settings.baseLife) return 0;
+    return cap;
   }
 
   getPace() {
@@ -395,9 +404,10 @@ export class Game {
     if (this.isTraining()) return;
     if (!this.settings.heartsEnabled) return;
     const amount = Math.max(1, this.settings.lifePerHeart);
-    if (this.settings.maxLife > 0) {
+    const lifeCap = this.getLifeCap();
+    if (lifeCap > 0) {
       this.state.baseLife = Math.min(
-        this.settings.maxLife,
+        lifeCap,
         this.state.baseLife + amount,
       );
     } else {

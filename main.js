@@ -500,6 +500,44 @@ function openSandboxSetup() {
   sbEntity?.focus();
 }
 
+function deleteAnswerInputChar() {
+  const { selectionStart, selectionEnd, value } = answerInput;
+  const hasSelection =
+    Number.isInteger(selectionStart) &&
+    Number.isInteger(selectionEnd) &&
+    selectionStart !== selectionEnd;
+
+  if (hasSelection) {
+    answerInput.setRangeText("", selectionStart, selectionEnd, "end");
+    return;
+  }
+
+  if (!Number.isInteger(selectionStart) || selectionStart <= 0) {
+    answerInput.value = value.slice(0, -1);
+    return;
+  }
+
+  answerInput.setRangeText(
+    "",
+    selectionStart - 1,
+    selectionStart,
+    "end",
+  );
+}
+
+answerInput.addEventListener("keydown", (event) => {
+  if (event.code === "NumpadSubtract") {
+    deleteAnswerInputChar();
+    event.preventDefault();
+    return;
+  }
+
+  if (event.code === "NumpadDecimal" || event.code === "NumpadComma") {
+    answerInput.value = "";
+    event.preventDefault();
+  }
+});
+
 shootBtn.addEventListener("click", () => game.handleShot(answerInput.value));
 document.addEventListener("keydown", (event) => {
   const k = event.key;
